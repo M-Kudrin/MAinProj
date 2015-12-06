@@ -31,6 +31,11 @@ public Track getTrackN(int n)
   return list.get(n);
 }
 
+public int getListSize()
+{
+    return list.size();
+}
+
 public void delTrack(int n)
 {
     list.remove(n);
