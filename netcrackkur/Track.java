@@ -5,6 +5,7 @@
  */
 package netcrackkur;
 import java.io.Serializable;
+import java.util.Objects;
 /**
  *
  * @author Elder
@@ -93,4 +94,47 @@ public class Track implements Serializable {
     {
         return(janrick);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.ispoln);
+        hash = 29 * hash + Objects.hashCode(this.album);
+        hash = 29 * hash + this.time;
+        hash = 29 * hash + Objects.hashCode(this.janrick);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Track other = (Track) obj;
+        if (this.time != other.time) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.ispoln, other.ispoln)) {
+            return false;
+        }
+        if (!Objects.equals(this.album, other.album)) {
+            return false;
+        }
+        if (!Objects.equals(this.janrick, other.janrick)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
