@@ -13,17 +13,16 @@ import netcrackkur.Track;
 import java.util.Map;
 import java.util.HashMap;
 import netcrackkur.DuplicateSubjectException;
+import netcrackkur.StorageHelper;
+import static netcrackkur.ConstantContainer.*;
 /**
  *
  * @author Demi
  */
 public class LoadController implements IController{
 
-    public Object execute(Object obj, HashMap<String,String> params) throws IOException, DuplicateSubjectException, ClassNotFoundException{
-        String str=params.get("0");
-        FileInputStream fis = new FileInputStream(str);
-        ObjectInputStream ois =  new ObjectInputStream(fis);
-        List<Track> list =  (List<Track>) ois.readObject();
-        return list;
+    public Object execute(Object obj, Map<String,String> params){
+        String str=params.get(NIL);
+        return new StorageHelper().loadTracklist(str);
     }    
 }

@@ -6,16 +6,18 @@
 package netcrackkur.controllers;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
+import netcrackkur.Genre;
 import netcrackkur.DuplicateSubjectException;
 import netcrackkur.Track;
 
 public class DeleteController implements IController{
-    List<Track> cash;
+    List<Track> cache;
+    List<Genre> genreCache;
     @Override
-    public Object execute(Object obj, HashMap<String, String> params) throws IOException, DuplicateSubjectException, ClassNotFoundException {
-        cash.remove((Track) obj);
+    public Object execute(Object obj, Map<String, String> params){
+        cache.remove((Track) obj);
         return null;
     }
     

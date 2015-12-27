@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import netcrackkur.controllers.ServiceController;
 import java.util.List;
 import java.util.HashMap;
+import static netcrackkur.ConstantContainer.*;
 
 /**
  *
@@ -29,14 +30,14 @@ ServiceController serviceController = ServiceController.getInstance();
      * Creates new form ContactEditorUI
      * 
      */
-    public ContactEditorUI() throws IOException, DuplicateSubjectException, ClassNotFoundException {
+    public ContactEditorUI(){
         initComponents();
         jaddPanel.setVisible(false);
         
         DefaultTableModel myModel = (DefaultTableModel)jTable1.getModel();
         
         HashMap<String, String> nameOfFile = new HashMap<>();
-        nameOfFile.put("0", "Cash.NetCrackKur");
+        nameOfFile.put(NIL, FILENAME);
         trackList = (List<Track>) serviceController.callController(ServiceController.OPERATION.LOAD, null, nameOfFile);
         for (Track track: trackList)
         {
@@ -365,53 +366,37 @@ ServiceController serviceController = ServiceController.getInstance();
     }//GEN-LAST:event_jMenu1ComponentAdded
 
     private void fileSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileSaveActionPerformed
-        FileDialog fdlg = new FileDialog(this, "Save file as...", FileDialog.SAVE);
-        fdlg.setDirectory("C:\\");
-        fdlg.setFile("*.NCrack");
+        FileDialog fdlg = new FileDialog(this, SAVE, FileDialog.SAVE);
+        fdlg.setDirectory(DIRECTORY);
+        fdlg.setFile(FILETYPE);
         fdlg.setVisible(true);
         String filename = fdlg.getDirectory()+fdlg.getFile();
-        if (fdlg.getFile() == null) {
-            //System.out.println("You cancelled the choice"); не надо так)
-        } else {
-            try
-            {
-                
-                try {
-                    HashMap<String, String> nameOfFile = new HashMap<>();
-                    nameOfFile.put("0", filename);
-                    Object op = serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
-                    int i = 0;
-                } catch (DuplicateSubjectException | ClassNotFoundException ex) {
-                    Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            catch (IOException e)
-            {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "IOException has been caught");
-            }
+        if (fdlg.getFile() != null)
+        {    
+            HashMap<String, String> nameOfFile = new HashMap<>();
+            nameOfFile.put(NIL, filename);
+            Object op = serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
+            int i = 0;                
+            //Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
+            /*
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "IOException has been caught");*/
+            
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_fileSaveActionPerformed
 
     private void fileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileExitActionPerformed
         // TODO add your handling code here:
-                try
-            {
-                    HashMap<String, String> nameOfFile = new HashMap<>();
-                    nameOfFile.put("0", "Cash.NetCrackKur");
-                    try {
-                        serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
-                    } catch (DuplicateSubjectException | ClassNotFoundException ex) {
-                        Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                
-            }
-            catch (IOException e)
-            {
+            
+        HashMap<String, String> nameOfFile = new HashMap<>();
+        nameOfFile.put(NIL, FILENAME);
+
+        serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
+                       // Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
+            /*
                 JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "IOException has been caught");
-            }
+                JOptionPane.showMessageDialog(frame, "IOException has been caught");*/            
         System.exit(0);
     }//GEN-LAST:event_fileExitActionPerformed
 
@@ -436,25 +421,20 @@ ServiceController serviceController = ServiceController.getInstance();
 
     private void fileDownloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileDownloadActionPerformed
         // TODO add your handling code here:
-        FileDialog fdlg = new FileDialog(this, "Save file as...", FileDialog.LOAD);
-        fdlg.setDirectory("C:\\");
-        fdlg.setFile("*.NCrack");
+        FileDialog fdlg = new FileDialog(this, SAVE, FileDialog.LOAD);
+        fdlg.setDirectory(DIRECTORY);
+        fdlg.setFile(FILETYPE);
         fdlg.setVisible(true);
         String filename = fdlg.getDirectory()+fdlg.getFile();
-        if (fdlg.getFile() == null) {
-            //System.out.println("You cancelled the choice"); не надо так
-        } else {
-            try
-            {
-                    HashMap<String, String> nameOfFile = new HashMap<>();
-                    nameOfFile.put("0", filename);
-                    trackList = (List<Track>) serviceController.callController(ServiceController.OPERATION.LOAD, null, nameOfFile);
-            }
-            catch (IOException | DuplicateSubjectException | ClassNotFoundException e)
-            {
-                JOptionPane.showMessageDialog(new JFrame(), "IOException has been caught");
-            }
+        if (fdlg.getFile() != null) {
+            
+            HashMap<String, String> nameOfFile = new HashMap<>();
+            nameOfFile.put(NIL, filename);
+            trackList = (List<Track>) serviceController.callController(ServiceController.OPERATION.LOAD, null, nameOfFile);
+           
+              //  JOptionPane.showMessageDialog(new JFrame(), "IOException has been caught");
         }
+        else{}
     }//GEN-LAST:event_fileDownloadActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -465,25 +445,15 @@ ServiceController serviceController = ServiceController.getInstance();
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        
-        try
-            {
-                
-                    HashMap<String, String> nameOfFile = new HashMap<>();
-                    nameOfFile.put("0", "Cash.NetCrackKur");
-                    try {
-                        serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
-                    } catch (DuplicateSubjectException | ClassNotFoundException ex) {
-                        Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+        HashMap<String, String> nameOfFile = new HashMap<>();
+        nameOfFile.put(NIL, FILENAME);
+        serviceController.callController(ServiceController.OPERATION.SAVE, trackList, nameOfFile);
+                       // Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
             
-            }
-            catch (IOException e)
-            {
-                JFrame frame = new JFrame();
-                JOptionPane.showMessageDialog(frame, "IOException has been caught");
-            }
-                System.exit(0);
+               /* JFrame frame = new JFrame();
+                JOptionPane.showMessageDialog(frame, "IOException has been caught");*/
+           
+        System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
     private void jAddIspolnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddIspolnActionPerformed
@@ -511,18 +481,19 @@ ServiceController serviceController = ServiceController.getInstance();
     private void editDellingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editDellingActionPerformed
         // TODO add your handling code here:
         int index = jTable1.getSelectedColumn();
-        if (index == -1) JOptionPane.showMessageDialog(new Frame(), "not selected track");
-        else{
-            try {
-                trackList.remove(index);
-                jTable1.removeRowSelectionInterval(index, index);
-                editView.doClick();
-                jTable1.clearSelection();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(new Frame(), "auch!");
+        if (index != -1)
+        {
+           // try {
+            trackList.remove(index);
+            jTable1.removeRowSelectionInterval(index, index);
+            editView.doClick();
+            jTable1.clearSelection();
+          /*  } catch (Exception e) {
+                JOptionPane.showMessageDialog(new Frame(), ERROR_MESSAGE);
                 Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, e);
-            }
+            }*/
         }
+        else JOptionPane.showMessageDialog(new Frame(), TRACK_NOT_SELECTED_MESSAGE);
     }//GEN-LAST:event_editDellingActionPerformed
 
     private void editAddingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editAddingActionPerformed

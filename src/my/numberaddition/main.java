@@ -43,11 +43,11 @@ public class main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                try {
+               // try {
                     new ContactEditorUI().setVisible(true);
-                } catch (IOException | DuplicateSubjectException | ClassNotFoundException ex) {
+               /* } catch (IOException | DuplicateSubjectException | ClassNotFoundException ex) {
                     Logger.getLogger(ContactEditorUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                }*/
             }
         });
     }

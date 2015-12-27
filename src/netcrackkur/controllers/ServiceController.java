@@ -6,7 +6,7 @@
 package netcrackkur.controllers;
 import java.io.IOException;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.EnumMap;
 import netcrackkur.DuplicateSubjectException;
 /**
  *
@@ -14,9 +14,9 @@ import netcrackkur.DuplicateSubjectException;
  */
 public class ServiceController {
     private static final ServiceController INSTANCE = new ServiceController();
-    private HashMap <OPERATION,IController> controllerMap;
+    private EnumMap <OPERATION,IController> controllerMap;
     private ServiceController(){        
-        controllerMap = new HashMap<>();
+        controllerMap = new EnumMap<>(OPERATION.class);
         
         LoadController loadController=new LoadController();
         controllerMap.put(OPERATION.LOAD, loadController);
@@ -43,7 +43,7 @@ public class ServiceController {
         DELETE,
         MODIFY        
     }
-    public Object callController(OPERATION operation, Object track, HashMap<String,String> params)throws IOException, DuplicateSubjectException, ClassNotFoundException{
+    public Object callController(OPERATION operation, Object track, Map<String,String> params){
         IController controller = controllerMap.get(operation);
         return controller.execute(track, params);
     }

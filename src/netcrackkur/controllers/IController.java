@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import netcrackkur.DuplicateSubjectException;
+import static netcrackkur.ConstantContainer.*;
 
 public interface IController {
-    Object execute(Object obj, HashMap<String,String> params) throws IOException, DuplicateSubjectException, ClassNotFoundException;
+    Object execute(Object obj, Map<String,String> params);
 }

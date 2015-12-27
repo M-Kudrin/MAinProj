@@ -6,19 +6,19 @@
 package netcrackkur.controllers;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import netcrackkur.DuplicateSubjectException;
 
 import netcrackkur.Track;
 
 public class CreateController implements IController{
-    List<Track> cash;
+    List<Track> cache;
     @Override
-    public Object execute(Object obj, HashMap<String, String> params) throws IOException, DuplicateSubjectException, ClassNotFoundException {
-        int numOfTrack = cash.indexOf(obj);
-        cash.add(numOfTrack, (Track) obj);
-        return cash.get(cash.size()-1);
+    public Object execute(Object obj, Map<String, String> params){
+        int numOfTrack = cache.indexOf(obj);
+        cache.add(numOfTrack, (Track) obj);
+        return cache.get(cache.size()-1);
     }
     
 }
